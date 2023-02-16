@@ -1,10 +1,18 @@
-//fetch today's photo on page load
-// date for a video to test fetch('https://api.nasa.gov/planetary/apod?date=2021-02-15&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g')
+//fetch random photo on page load with count=1
+//date for a video to test fetch('https://api.nasa.gov/planetary/apod?date=2021-02-15&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g')
 
-let date = new Date();
-let today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate()
+//create today's date in proper format
+// let date = new Date();
+// let today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate()
 
-//fetch today's photo on load
+//fetch to get all images from certain start date to end date
+// fetch(`https://api.nasa.gov/planetary/apod?start_date=2023-02-01&end_date=${today}&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
+//         .then(res => res.json())
+//         .then(data => {
+//             console.log(data)
+//         })
+
+//fetch random photo on load
 document.querySelector('body').addEventListener('load', getPhotoByDate())
 //fetch requested date on button/enter key
 document.querySelector('#form').addEventListener('submit', getPhotoByDate)
@@ -12,11 +20,15 @@ document.querySelector('#form').addEventListener('submit', getPhotoByDate)
 function getPhotoByDate(e){
     e ? e.preventDefault() : null
     let input = document.querySelector('input').value
-    // console.log(input)
-    input ? today = input : null
-    fetch(`https://api.nasa.gov/planetary/apod?date=${today}&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
+    input = input ?`date=${input}` : 'count=1'
+    console.log(input)
+    fetch(`https://api.nasa.gov/planetary/apod?${input}&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
         .then(res => res.json())
         .then(data => {
+            if(Array.isArray(data)){
+                data = data[0]
+            }
+            console.log(data)
             document.querySelector('#error').innerText = ''
             if(data.msg){
                 document.querySelector('#error').innerText = data.msg
@@ -34,7 +46,6 @@ function getPhotoByDate(e){
             document.querySelector('#title').innerText = data.title
             data.copyright ? document.querySelector('.copyright').innerText = "\u00A9" + data.copyright : document.querySelector('.copyright').innerText = ''
             document.querySelector('.explanation').innerText = data.explanation
-            console.log(data)
         })
         .catch(err => console.log(`Error: ${err}`))
 }

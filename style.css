@@ -1,6 +1,7 @@
 
 body{
     font-size: 1.5rem;
+    /* https://cssdeck.com/labs/css-metallic-background */
 	background: -webkit-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background: -moz-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background: -ms-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
@@ -34,7 +35,7 @@ form {
     position: relative;
     height: 0;
     width: 100%;
-    padding-bottom: 49.999%;
+    padding-bottom: 56.25%;
 }
 
 h1, #title {
@@ -45,6 +46,7 @@ h3{
     margin: .5rem 0 0 0;
     background-color: #c0c0c0a9;
 }
+
 
 iframe {
     position: absolute;
