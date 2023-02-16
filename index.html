@@ -7,23 +7,33 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Photo a day</title>
+    <title>Journey to the Stars...</title>
 
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="normalize.css"> -->
+    <link rel="stylesheet" href="normalize.css">
 </head>
 <body>
-    <h1>Amazing NASA photos</h1>
+    <h1>Journey to the Stars...</h1>
     <form id="form" action="">
         <label for="date">Choose a date:</label>
         <input id="date" type="date">
         <button>Search</button>
+        <span id="error"></span>
     </form>
-    <span class="date"></span>
-    <iframe src="" frameborder="0"></iframe>
-    <img src="" alt="">
-    <span class="copyright"></span>
-    <p class="explanation"></p>
+    <section id="results">
+        <h3 id="title"></h3>
+        <section id="visuals">
+            <div id="video">
+                <iframe src="" frameborder="0"></iframe>
+            </div>
+            <img src="" alt="">
+        </section>
+        <section id="texts">
+            <span class="date"></span>
+            <span class="copyright"></span>
+            <p class="explanation"></p>
+        </section>
+    </section>
     <script src="main.js"></script>
 </body>
 </html>
