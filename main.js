@@ -22,7 +22,7 @@ function getPhotoByDate(e){
     let input = document.querySelector('input').value
     input = input ?`date=${input}` : 'count=1'
     console.log(input)
-    fetch(`https://api.nasa.gov/planetary/apod?${input}&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
+    fetch(`https://api.nasa.gov/planetary/apod?${input}&thumbs=true&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
         .then(res => res.json())
         .then(data => {
             if(Array.isArray(data)){
@@ -38,14 +38,17 @@ function getPhotoByDate(e){
             if(data.media_type === 'image'){
                 document.querySelector('#video').style.display = 'none'
                 document.querySelector('img').src = data.url
+                document.body.style.backgroundImage = `url(${data.url})`
             }else{
                 document.querySelector('img').src = ''
+                // document.querySelector('img').src = data.thumbnail_url
+                document.body.style.backgroundImage = `url(${data.thumbnail_url})`
                 document.querySelector('iframe').src = data.url
                 document.querySelector('#video').style.display = 'block'
             }
             document.querySelector('#title').innerText = data.title
             data.copyright ? document.querySelector('.copyright').innerText = "\u00A9" + data.copyright : document.querySelector('.copyright').innerText = ''
-            document.querySelector('.explanation').innerText = data.explanation
+            document.querySelector('.explanation').innerText = data.explanation  
         })
         .catch(err => console.log(`Error: ${err}`))
 }

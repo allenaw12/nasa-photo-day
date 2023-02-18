@@ -1,15 +1,21 @@
 
 body{
     font-size: 1.5rem;
+    background-color: black;
+    background-image: none;
+    background-position: center;
+    /* background-repeat: no-repeat; */
+    background-size: 120%;
+    backdrop-filter:blur(1rem);
     /* https://cssdeck.com/labs/css-metallic-background */
-	background: -webkit-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	/* background: -webkit-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background: -moz-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background: -ms-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background: -o-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background: radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background-size: 10px 10px, 10px 10px, 100% 100%;
 	background-position: 1px 1px, 0px 0px, center center;
-	top: 0;
+	top: 0; */
 }
 
 #results {
@@ -25,10 +31,10 @@ body{
 form {
     margin: 0 auto;
     max-width: 700px;
-    background-color: #c0c0c0a9;
+    background-color: #ffffff6b;
 }
 #texts{
-    background-color: #c0c0c0a9;
+    background-color: #ffffff6b;
 }
 
 #video{
@@ -41,10 +47,15 @@ form {
 h1, #title {
     text-align: center;
 }
+h1{
+    margin-top: 0;
+    padding-top: 2rem;
+    mix-blend-mode: difference;
+}
 h3{
     padding: .5rem;
     margin: .5rem 0 0 0;
-    background-color: #c0c0c0a9;
+    background-color: #ffffffa9;
 }
 
 
