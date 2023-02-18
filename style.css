@@ -6,7 +6,7 @@ body{
     background-position: center;
     /* background-repeat: no-repeat; */
     background-size: 120%;
-    backdrop-filter:blur(1rem);
+    backdrop-filter: blur(1rem);
     /* https://cssdeck.com/labs/css-metallic-background */
 	/* background: -webkit-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
 	background: -moz-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
@@ -18,23 +18,30 @@ body{
 	top: 0; */
 }
 
+#explanation {
+    margin-top: 1rem;
+}
+
 #results {
     position: relative;
     margin: 0 auto;
     max-width: 700px;
 }
 
-#visuals, #texts, form {
+#visuals, form {
     padding: 1rem;
 }
 
 form {
     margin: 0 auto;
-    max-width: 700px;
+    max-width: 680px;
     background-color: #ffffff6b;
+    border-radius: 1rem;
 }
 #texts{
     background-color: #ffffff6b;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem 2rem;
 }
 
 #video{
@@ -48,16 +55,28 @@ h1, #title {
     text-align: center;
 }
 h1{
-    margin-top: 0;
+    margin: 0 auto 2rem auto;
+    max-width: 700px;
+    /* margin-top: 0; */
     padding-top: 2rem;
-    mix-blend-mode: difference;
+    padding-bottom: .5rem;
+    background-color: #ffffff6b;
+    border-radius: 0 0 1rem 1rem;
 }
 h3{
     padding: .5rem;
-    margin: .5rem 0 0 0;
-    background-color: #ffffffa9;
+    margin: 1rem 0 0 0;
+    background-color: #ffffff6b;
+    border-radius: 1rem;
 }
-
+footer {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+    background-color: #ffffff6b;
+    /* border-radius: 10%; */
+}
 
 iframe {
     position: absolute;
@@ -70,9 +89,10 @@ img{
     width: 100%;
 }
 
-.copyright {
+#copyright {
+    text-align: right;
     position: absolute;
-    right: 1rem;
+    right: 2rem;
 }
 
 button{

@@ -12,19 +12,23 @@
 //             console.log(data)
 //         })
 
+//really crazy copyright date: 2005-04-12
+
 //fetch random photo on load
 document.querySelector('body').addEventListener('load', getPhotoByDate())
 //fetch requested date on button/enter key
 document.querySelector('#form').addEventListener('submit', getPhotoByDate)
 
-function getPhotoByDate(e){
+async function getPhotoByDate(e){
     e ? e.preventDefault() : null
     let input = document.querySelector('input').value
     input = input ?`date=${input}` : 'count=1'
     console.log(input)
-    fetch(`https://api.nasa.gov/planetary/apod?${input}&thumbs=true&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
+    await fetch(`https://api.nasa.gov/planetary/apod?${input}&thumbs=true&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
         .then(res => res.json())
         .then(data => {
+            document.getElementById('explanation').style.marginTop = null
+            document.getElementById('copyright').style.marginTop = null
             if(Array.isArray(data)){
                 data = data[0]
             }
@@ -34,12 +38,13 @@ function getPhotoByDate(e){
                 document.querySelector('#error').innerText = data.msg
                 return
             }
-            document.querySelector('.date').innerText = data.date
+            document.getElementById('photoDate').innerText = data.date
             if(data.media_type === 'image'){
                 document.querySelector('#video').style.display = 'none'
                 document.querySelector('img').src = data.url
                 document.body.style.backgroundImage = `url(${data.url})`
             }else{
+                if(data.media_type == 'other' || data.media_type == 'gif')console.log('TYPE OTHER GIF!!!!')
                 document.querySelector('img').src = ''
                 // document.querySelector('img').src = data.thumbnail_url
                 document.body.style.backgroundImage = `url(${data.thumbnail_url})`
@@ -47,8 +52,31 @@ function getPhotoByDate(e){
                 document.querySelector('#video').style.display = 'block'
             }
             document.querySelector('#title').innerText = data.title
-            data.copyright ? document.querySelector('.copyright').innerText = "\u00A9" + data.copyright : document.querySelector('.copyright').innerText = ''
-            document.querySelector('.explanation').innerText = data.explanation  
+            let copyrightEl = document.getElementById('copyright')
+            let cc = data.copyright
+            document.querySelector('#explanation').innerText = data.explanation
+            if(cc && (cc.includes('\n') || cc.length > 27)){
+                console.log('longggg copyright')
+                let newLineCount = 1
+                for(char of cc){
+                    if(char == String.fromCharCode(10)){
+                        console.log('new line counted')
+                        newLineCount++
+                    }
+                }
+                /////////////calculate middle of multiple new lines and join with new line there, instead of just first and second words
+                if(newLineCount > 2){
+                    let noLines = cc.split('\n')
+                    let i0 = noLines[0] + '\n' + noLines[1]
+                    console.log(i0)
+                    cc = i0.concat(noLines.slice(2).join(' '))
+                }
+                console.log(cc)
+                copyrightEl.style.marginTop = "1.6rem"
+                document.getElementById('explanation').style.marginTop = "3.5rem"
+            }
+            
+            cc ? copyrightEl.innerText = "\u00A9" + cc : copyrightEl.innerText = ''
         })
         .catch(err => console.log(`Error: ${err}`))
 }
