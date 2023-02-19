@@ -13,6 +13,8 @@
 //         })
 
 //really crazy copyright date: 2005-04-12
+//short copyright but with a new line element: 2008-09-25
+//too long for one line mobile, no new line element: '2010-03-16'
 
 //fetch random photo on load
 document.querySelector('body').addEventListener('load', getPhotoByDate())
@@ -38,7 +40,8 @@ async function getPhotoByDate(e){
                 document.querySelector('#error').innerText = data.msg
                 return
             }
-            document.getElementById('photoDate').innerText = data.date
+            let date = data.date.slice(5) + '-' + data.date.slice(0,4)
+            document.getElementById('photoDate').innerText = date
             if(data.media_type === 'image'){
                 document.querySelector('#video').style.display = 'none'
                 document.querySelector('img').src = data.url
@@ -55,27 +58,56 @@ async function getPhotoByDate(e){
             let copyrightEl = document.getElementById('copyright')
             let cc = data.copyright
             document.querySelector('#explanation').innerText = data.explanation
-            if(cc && (cc.includes('\n') || cc.length > 27)){
-                console.log('longggg copyright')
-                let newLineCount = 1
-                for(char of cc){
-                    if(char == String.fromCharCode(10)){
-                        console.log('new line counted')
-                        newLineCount++
-                    }
-                }
-                /////////////calculate middle of multiple new lines and join with new line there, instead of just first and second words
-                if(newLineCount > 2){
+            if(cc && (cc.includes('\n') || cc.length > 26)){
+                console.log('longggg copyright', cc)
+                // let newLineCount = 1
+                // for(char of cc){
+                //     if(char == String.fromCharCode(10)){
+                //         console.log('new line counted')
+                //         newLineCount++
+                //     }
+                // }
+                // if(newLineCount >= 2)
+                if(cc.indexOf('\n') !== cc.lastIndexOf('\n')){
+                    console.log('newlines greater than or equal to 2')
                     let noLines = cc.split('\n')
-                    let i0 = noLines[0] + '\n' + noLines[1]
-                    console.log(i0)
-                    cc = i0.concat(noLines.slice(2).join(' '))
+                    cc = noLines.join(' ')
+                    // let middle = Math.floor(noLines.length/2)
+                    // let i0 = noLines.length > 2 ? noLines[middle] += '\n' + noLines[middle+1] : noLines
+                    // console.log(i0)
+                    // cc = i0 !== noLines ? i0.concat(noLines.slice(2).join(' ')) : i0.join(' ')
                 }
-                console.log(cc)
-                copyrightEl.style.marginTop = "1.6rem"
-                document.getElementById('explanation').style.marginTop = "3.5rem"
+                if(cc.length > 26){
+                    console.log(cc.length, '> 26')
+                    let spaces = cc.split(' ')
+                    let newcc = []
+                    console.log(spaces)
+                    for(i=0;i<spaces.length;i++){
+                        if(i===0){
+                            newcc.push(spaces[i])
+                        }else if(!newcc[1] && (newcc[0].length + spaces[i].length) <= 26){
+                            console.log('newcc 0 concating',i, newcc[0].length + spaces[i].length)
+                            newcc[0] += ' ' + spaces[i]
+                        }else if((newcc[1] && newcc[1].length + spaces[i].length <= 40)||(newcc[2] && newcc[2].length + spaces[i].length <= 37)){
+                            console.log('newcc 1 or 2 concating',i,newcc[2] ? newcc[1].length + spaces[i].length : newcc[1].length + spaces[i].length)
+                            newcc[2] ? newcc[2] += ' ' + spaces[i] : newcc[1] += ' ' + spaces[i]
+                        }else if(!newcc[1] || !newcc[2]){
+                            console.log('newcc index 1 or 2')
+                            newcc.push('\n' + spaces[i])
+                        }else{
+                            console.log('newcc basic push')
+                            newcc.push(spaces[i])
+                        }
+                    }
+                    console.log(newcc)
+                    cc = newcc.join(' ')
+                }
+                console.log(cc.length)
+                // copyrightEl.style.marginTop = "1.6rem"
+                cc.indexOf('\n') !== cc.lastIndexOf('\n') ?
+                document.getElementById('explanation').style.marginTop = "3.5rem" : 
+                document.getElementById('explanation').style.marginTop = "2.5rem"
             }
-            
             cc ? copyrightEl.innerText = "\u00A9" + cc : copyrightEl.innerText = ''
         })
         .catch(err => console.log(`Error: ${err}`))
