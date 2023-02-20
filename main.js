@@ -20,11 +20,14 @@
 document.querySelector('body').addEventListener('load', getPhotoByDate())
 //fetch requested date on button/enter key
 document.querySelector('#form').addEventListener('submit', getPhotoByDate)
+//random button
+document.querySelector('#random').addEventListener('click', getPhotoByDate)
 
 async function getPhotoByDate(e){
-    e ? e.preventDefault() : null
+    e?.preventDefault()
     let input = document.querySelector('input').value
-    input = input ?`date=${input}` : 'count=1'
+    // console.log(e, e?.srcElement.id)
+    input = input && e?.srcElement.id == 'form' ?`date=${input}` : 'count=1'
     console.log(input)
     await fetch(`https://api.nasa.gov/planetary/apod?${input}&thumbs=true&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
         .then(res => res.json())

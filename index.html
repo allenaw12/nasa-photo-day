@@ -15,13 +15,14 @@
 <body>
     <header>
         <h1>Journey to the Stars...</h1>
-        <p>A random image is chosen on load, then you can pick the date and see NASA's photo of the day from that date!</p>
+        <p>A random image is chosen on load, then you can pick the date and see NASA's photo of the day from that date! Or hit the random button to get another random amazing astronomy photo!</p>
     </header>
     <form id="form" action="">
         <label for="date">Choose a date:</label>
         <input id="date" type="date">
-        <button>Search</button>
+        <button id="dateSearch" class="btn">Search</button>
         <span id="error"></span>
+        <button id="random" class="btn random">Random!</button>
     </form>
     <section id="results">
         <h3 id="title"></h3>
