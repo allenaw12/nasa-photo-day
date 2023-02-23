@@ -28,7 +28,7 @@ async function getPhotoByDate(e){
     let input = document.querySelector('input').value
     // console.log(e, e?.srcElement.id)
     input = input && e?.srcElement.id == 'form' ?`date=${input}` : 'count=1'
-    console.log(input)
+    //console.log(input)
     await fetch(`https://api.nasa.gov/planetary/apod?${input}&thumbs=true&api_key=HTx6NaJHwsGSGpIZ8me685Y7LBXNP99XNupNb13g`)
         .then(res => res.json())
         .then(data => {
@@ -37,14 +37,13 @@ async function getPhotoByDate(e){
             if(Array.isArray(data)){
                 data = data[0]
             }
-            console.log(data)
+            //console.log(data)
             document.querySelector('#error').innerText = ''
             if(data.msg){
                 document.querySelector('#error').innerText = data.msg
                 return
             }
             let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-            console.log(data.date[8])
             let date = months[+data.date.slice(5,7)-1] + ' ' + (data.date[8] == 0 ? data.date[9] : data.date.slice(8)) + ', ' + data.date.slice(0,4)
             document.getElementById('photoDate').innerText = date
             if(data.media_type === 'image'){
@@ -52,7 +51,7 @@ async function getPhotoByDate(e){
                 document.querySelector('img').src = data.url
                 document.body.style.backgroundImage = `url(${data.url})`
             }else{
-                if(data.media_type == 'other' || data.media_type == 'gif')console.log('TYPE OTHER GIF!!!!')
+                //if(data.media_type == 'other' || data.media_type == 'gif')console.log('TYPE OTHER GIF!!!!')
                 document.querySelector('img').src = ''
                 // document.querySelector('img').src = data.thumbnail_url
                 document.body.style.backgroundImage = `url(${data.thumbnail_url})`
