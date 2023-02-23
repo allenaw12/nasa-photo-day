@@ -43,8 +43,10 @@ async function getPhotoByDate(e){
                 document.querySelector('#error').innerText = data.msg
                 return
             }
-            // let date = data.date.slice(5) + '-' + data.date.slice(0,4)
-            document.getElementById('photoDate').innerText = data.date
+            let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+            console.log(data.date[8])
+            let date = months[+data.date.slice(5,7)-1] + ' ' + (data.date[8] == 0 ? data.date[9] : data.date.slice(8)) + ', ' + data.date.slice(0,4)
+            document.getElementById('photoDate').innerText = date
             if(data.media_type === 'image'){
                 document.querySelector('#video').style.display = 'none'
                 document.querySelector('img').src = data.url
